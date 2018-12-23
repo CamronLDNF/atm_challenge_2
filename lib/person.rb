@@ -15,18 +15,26 @@ class Person
   end
 
   def deposit(amount)
-    balance = @account.balance
-    balance += amount
+    @account == nil ? missing_account : deposit_funds(amount) 
   end
 
   private
 
-  def set_name(name)
-    name == nil ? missing_name : name
-  end
+    def set_name(name)
+      name == nil ? missing_name : name
+    end
 
     def missing_name
       raise 'A name is required'
     end
-  
+    
+    def deposit_funds(amount)
+      balance = @account.balance
+      balance += amount
+    end
+    
+    def missing_account
+      raise 'No account present'
+    end
+
 end
