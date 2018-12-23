@@ -1,24 +1,32 @@
-require 'date'
+require './lib/account.rb'
 
 class Person
 
-  # attr_accessor
-  attr_reader :cash, :account, :name
+  attr_accessor :name, :cash, :account
 
-  def initialize(attrs={})
+  def initialize(attrs = {})
+    @name = set_name(attrs[:name])
     @cash = 0
-    @account = attrs[:account]
-    set_name(attrs[:name])
+    @account = nil
+  end
+
+  def create_account
+    @account = Account.new(owner: self)
+  end
+
+  def deposit(amount)
+    balance = @account.balance
+    balance += amount
   end
 
   private
 
-  def set_name(obj)
-    obj == nil ? missing_name : @name = obj
+  def set_name(name)
+    name == nil ? missing_name : name
   end
 
-  def missing_name
-    raise 'A name is required'
-  end
+    def missing_name
+      raise 'A name is required'
+    end
   
 end

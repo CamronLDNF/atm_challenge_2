@@ -22,10 +22,8 @@ describe Person do
   end
 
   describe 'can create an Account' do
-    # As a Person,
-    # in order to be able to use banking services to manage my funds,
-    # i would like to be able to create a bank account
     before { subject.create_account }
+
     it 'of Account class ' do
       expect(subject.account).to be_an_instance_of Account
     end
@@ -41,11 +39,12 @@ describe Person do
     # in order to be able to put my funds in the account ,
     # i would like to be able to make a deposit
     before { subject.create_account }
+    
     it 'can deposit funds' do
       expect(subject.deposit(100)).to be_truthy
     end
   end
-  
+
   describe 'can not manage funds if no account been created' do
     # As a Person without a Bank Account,
     # in order to prevent me from using the wrong bank account,
