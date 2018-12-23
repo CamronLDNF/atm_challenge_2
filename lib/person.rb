@@ -18,6 +18,10 @@ class Person
     @account == nil ? missing_account : deposit_funds(amount) 
   end
 
+  def withdraw(args = {})
+    args[:atm] ? withdraw_funds(args) : missing_atm
+  end
+
   private
 
     def set_name(name)
@@ -29,12 +33,22 @@ class Person
     end
     
     def deposit_funds(amount)
-      balance = @account.balance
-      balance += amount
+      @cash -= amount
+      @account.balance += amount
     end
     
     def missing_account
       raise 'No account present'
+    end
+
+    def withdraw_funds(args)
+      amount = args[:amount]
+      @account.balance -= amount
+      @cash += amount  
+    end
+
+    def missing_atm
+      raise 'An ATM is required'
     end
 
 end
